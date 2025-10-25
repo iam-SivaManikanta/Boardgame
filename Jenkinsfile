@@ -42,7 +42,7 @@ pipeline {
                     -Dsonar.projectName=Boardgame \
                     -Dsonar.projectKey=Boardgame \
                     -Dsonar.java.binaries=target/classes 
-                    '''
+                       '''
              }
             }
         }
@@ -153,6 +153,7 @@ pipeline {
             }
         }
     }
+}
 
    
 
