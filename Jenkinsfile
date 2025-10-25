@@ -75,7 +75,7 @@ pipeline {
                     withDockerRegistry(credentialsId: 'dockerhub_creds', toolName: 'docker') {
                         sh '''
                         docker build -t boardgame .
-                        docker tag boardgame siva937/boardgame:latest
+                        docker tag boardgame mani937/boardgame:latest
                         '''
                     }
                 }
@@ -93,7 +93,7 @@ pipeline {
                 script {
                     withDockerRegistry(credentialsId: 'dockerhub_creds', toolName: 'docker') {
                         sh '''
-                        docker push siva937/boardgame:latest
+                        docker push mani937/boardgame:latest
                         '''
                     }
                 }
