@@ -99,10 +99,34 @@ pipeline {
             }
         }
 
-        
+        stage('Deploy to Kubernetes') {
+            steps {
+                withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'lke527832', contextName: '', credentialsId: 'k8-cred', namespace: 'webapps', serverUrl: 'https://518ce15f-0f44-4434-aed2-ffb0f1d7c3ef.ap-west-1-gw.linodelke.net:443']]) {
 
+                    sh "kubectl apply -f deployment-service.yaml" 
+                }
+            }
+        }
 
+        stage('verify Kubernetes') {
+            steps {
+                withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'lke527832', contextName: '', credentialsId: 'k8-cred', namespace: 'webapps', serverUrl: 'https://518ce15f-0f44-4434-aed2-ffb0f1d7c3ef.ap-west-1-gw.linodelke.net:443']]) {
 
+                     sh "kubectl get pods -n webapps"
+                     sh "kubectl get svc -n webapps"
+                }
+            }
+        }
+    }
 
-}
+    post {
+        always {
+            script {
+
+            }
+        }
+    }
+
+   
+
 
